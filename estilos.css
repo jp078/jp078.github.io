@@ -1,0 +1,17 @@
+
+
+
+.contenedor{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+
+}
+.contenedor P{
+    color: white;
+
+}
+.contenedor h1{
+    color: white;
+}
+
