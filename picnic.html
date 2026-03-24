@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artistas Favoritos</title>
+
+<!-- Picnic CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+
+<!-- Tu CSS personal -->
+<link rel="stylesheet" href="picnicstyle.css">
+
+</head>
+
+<body>
+  
+
+<h1 class="center">Mis artistas favoritos</h1>
+
+<div class="center">
+<button id="musico">Ver mi artista favorito</button>
+<button class="success" id="companero">Ver otro artista favorito</button>
+</div>
+
+<br>
+
+<!-- GRID DE CONTENIDO -->
+<div class="flex two four-1200">
+
+<div id="bio">
+<h3>Biografía</h3>
+</div>
+
+<div id="imagen">
+<h3>Imagen</h3>
+</div>
+
+<div id="bio2">
+<h3>Biografía 2</h3>
+</div>
+
+<div id="imagen2">
+<h3>Imagen 2</h3>
+</div>
+
+</div>
+
+<br>
+
+<!-- TABS -->
+<div class="tabs two">
+
+<input id="tab-1" type="radio" name="tabgroupB" checked>
+<label class="pseudo button toggle" for="tab-1">Pregunta 1</label>
+
+<input id="tab-2" type="radio" name="tabgroupB">
+<label class="pseudo button toggle" for="tab-2">Pregunta 2</label>
+
+<div class="row">
+
+<div>
+<h2>¿Cómo fue tu experiencia el domingo?</h2>
+
+<p>
+Estuvo raro ya que ese dia quede de ir al menudo con una amiga, fuimos y los ubers llegando a peri tomaban otra ruta mas larga dentro de la ciudad pero no entendia nada hasta que comiendo menudo empece a ver las noticias y ya me di cuenta , despues regrese a mi casa y no hice nada en todo el dia
+</p>
+
+</div>
+
+<div>
+
+<h2>¿Qué te gustaría que cambiara?</h2>
+
+<p>
+Que no fuera tan normalizada la violencia en mexico y que fuera algo que la gente no lo viera como algo normal o algo en lo que quieran pertencer 
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let biografia;
+let biografia2;
+
+document.addEventListener("DOMContentLoaded", function() {
+
+biografia = document.getElementById("bio");
+biografia2 = document.getElementById("bio2");
+
+document.getElementById("musico").addEventListener("click", obtenerJSON);
+document.getElementById("companero").addEventListener("click", obtenerJSON2);
+
+console.log("DOM listo");
+
+});
+
+
+async function obtenerJSON(){
+
+const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=Bad Bunny');
+const datos = await respuesta.json();
+
+biografia.innerHTML = "";
+document.getElementById("imagen").innerHTML = "";
+
+const texto = document.createElement("p");
+texto.textContent = datos.artists[0].strBiographyES || datos.artists[0].strBiographyEN;
+
+biografia.appendChild(texto);
+
+const imagen = document.createElement("img");
+imagen.src = datos.artists[0].strArtistWideThumb;
+imagen.style.width = "100%";
+
+document.getElementById("imagen").appendChild(imagen);
+
+}
+
+
+async function obtenerJSON2(){
+
+const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/2/search.php?s=Luis Miguel');
+const datos = await respuesta.json();
+
+biografia2.innerHTML = "";
+document.getElementById("imagen2").innerHTML = "";
+
+const texto = document.createElement("p");
+texto.textContent = datos.artists[0].strBiographyES || datos.artists[0].strBiographyEN;
+
+biografia2.appendChild(texto);
+
+const imagen = document.createElement("img");
+imagen.src = datos.artists[0].strArtistThumb;
+imagen.style.width = "100%";
+
+document.getElementById("imagen2").appendChild(imagen);
+
+}
+
+</script>
+
+</body>
+</html>
