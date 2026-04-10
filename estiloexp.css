@@ -1,0 +1,15 @@
+.contenedor{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    
+    
+}
+.contenedor img{
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+}
+p{
+    font-size: 18px;
+    }
